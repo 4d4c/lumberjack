@@ -8,19 +8,20 @@ class Lumberjack():
     """
     Logging class that prints to console and file.
 
-    log_file     : Output filename
+    log_filename : Output filename
     print_debug  : Print debug messages to console
     console_time : Print timestamps to console
     """
 
-    def __init__(self, log_file=False, print_debug=False, console_time=True):
+    def __init__(self, log_filename=False, print_debug=False, console_time=True):
         self.console_time = console_time
         self.print_debug = print_debug
 
         try:
-            if log_file:
-                self.log_file = open(log_file, "a")
-                self.log_file.write("\n" + "#" * 80 + "\n\n")
+            if log_filename:
+                self.log_filename = log_filename
+                with open(log_filename, "a") as log_file:
+                    log_file.write("\n" + "#" * 80 + "\n\n")
             else:
                 self.log_file = False
         except FileNotFoundError:
@@ -50,8 +51,9 @@ class Lumberjack():
         else:
             print(colored(full_message, color, attrs=['bold']))
 
-        if self.log_file:
-            self.log_file.write(full_message.strip() + "\n")
+        if self.log_filename:
+            with open(self.log_filename, "a") as log_file:
+                log_file.write(full_message.strip() + "\n")
 
 
     def error(self, message):
