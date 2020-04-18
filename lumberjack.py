@@ -23,12 +23,12 @@ class Lumberjack():
                 with open(log_filename, "a") as log_file:
                     log_file.write("\n" + "#" * 80 + "\n\n")
             else:
-                self.log_file = False
+                self.log_filename = False
         except FileNotFoundError:
-            print(colored("[-] ERROR: File not found: " + log_file, "red", attrs=['bold']))
+            print(colored("[-] ERROR: File not found: " + log_filename, "red", attrs=['bold']))
             sys.exit(1)
         except PermissionError:
-            print(colored("[-] ERROR: Can't open file: " + log_file, "red", attrs=['bold']))
+            print(colored("[-] ERROR: Can't open file: " + log_filename, "red", attrs=['bold']))
             sys.exit(1)
 
 
